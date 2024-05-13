@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Row, Col, Input, Button, Card, Typography } from "antd";
+import { Row, Col, Input, Button, Card, Typography, Space } from "antd";
 import "./App.css";
 function App() {
   const [memorizedWords, setMemorizedWords] = useState<string[]>([]);
@@ -82,7 +82,7 @@ function App() {
 
 
   const [showMemorized, setShowMemorized] = useState(false)
-  const [showUnMemorized, setShowUnMemorized] = useState(false)
+  const [showUnMemorized, setShowUnMemorized] = useState(true)
 
   return (
     <>
@@ -162,11 +162,16 @@ function App() {
       </div>
       <Row gutter={[12, 12]}>
         <Col span={24}>
-          <Card onClick={() => setShowUnMemorized(!showUnMemorized)} title={<span style={{ color: 'white', cursor: 'pointer' }}>Un Memorized </span>} style={{ backgroundColor: 'black' }}>
+          <Card  extra={<Button onClick={() => setShowUnMemorized(!showUnMemorized)}>Toggle</Button>} title={<span  style={{ color: 'white', cursor: 'pointer' }}>Un Memorized </span>} style={{ backgroundColor: 'black' }}>
             {showUnMemorized && <div>
+              <Space>
               {unMemorizedWords.map((word) => (
-                <span style={{ color: "white" }}>{word}, </span>
+                <a href={'https://youglish.com/pronounce/'+ word} target="_blank" >
+                <Button >{word} </Button>
+
+                </a>
               ))}
+              </Space>
             </div>}
 
           </Card>
