@@ -19,20 +19,19 @@ const routers = createBrowserRouter([
             path: '',
             element: <Home></Home>,
           },
+          {
+            path: 'words-new',
+            element: <WordsNew></WordsNew>,
+          },
+          {
+            path: 'words-memorized',
+            element: <WordsMemorized></WordsMemorized>,
+          },
+          {
+            path: 'words-unmemorized',
+            element: <WordsUnMemorized></WordsUnMemorized>,
+          },
         ],
-      },
-
-      {
-        path: 'words-new',
-        element: <WordsNew></WordsNew>,
-      },
-      {
-        path: 'words-memorized',
-        element: <WordsMemorized></WordsMemorized>,
-      },
-      {
-        path: 'words-unmemorized',
-        element: <WordsUnMemorized></WordsUnMemorized>,
       },
     ],
   },

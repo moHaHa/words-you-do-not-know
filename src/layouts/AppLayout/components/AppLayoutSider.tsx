@@ -8,27 +8,40 @@ import {
 } from '@ant-design/icons';
 import { Menu, theme } from 'antd';
 import Sider from 'antd/es/layout/Sider';
-import React, { FC } from 'react';
+import { ItemType, MenuItemType } from 'antd/es/menu/hooks/useItems';
+import React, { FC, useMemo } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 interface AppLayoutSiderProps {}
 const AppLayoutSider: FC<AppLayoutSiderProps> = ({}) => {
+  const location = useLocation();
+
   const items = [
     {
       key: 'words-new',
-      label: 'Words New',
+      label: <Link to={'/words-new'}>Words New</Link>,
       icon: <FileAddOutlined></FileAddOutlined>,
     },
     {
       key: 'words-unmemorized',
-      label: 'Words Unmemorized',
+      label: <Link to={'/words-unmemorized'}>Words Unmemorized</Link>,
       icon: <FireOutlined></FireOutlined>,
     },
     {
       key: 'words-memorized',
-      label: 'Words Memorized',
+      label: <Link to={'/words-memorized'}>Words Memorized</Link>,
       icon: <BookOutlined></BookOutlined>,
     },
   ];
+  const activeItem = useMemo(() => {
+    const item = items.find((e) => location.pathname.includes(e.key));
+    if (item != undefined) {
+      return item.key;
+    } else {
+      return undefined;
+    }
+  }, [location, items]);
+
   return (
     <Sider
       style={{ borderInlineEnd: '1px dashed gray' }}
@@ -36,18 +49,12 @@ const AppLayoutSider: FC<AppLayoutSiderProps> = ({}) => {
       breakpoint="lg"
       collapsedWidth="0"
       width={240}
-      onBreakpoint={(broken) => {
-        console.log(broken);
-      }}
-      onCollapse={(collapsed, type) => {
-        console.log(collapsed, type);
-      }}
     >
       <div className="demo-logo-vertical" />
       <Menu
         theme="light"
         mode="inline"
-        defaultSelectedKeys={['4']}
+        selectedKeys={[...(activeItem ? [activeItem] : [])]}
         items={items}
       />
     </Sider>

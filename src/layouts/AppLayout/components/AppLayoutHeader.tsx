@@ -1,6 +1,7 @@
 import { theme } from 'antd';
 import { Header } from 'antd/es/layout/layout';
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 interface AppLayoutHeaderProps {}
 const AppLayoutHeader: FC<AppLayoutHeaderProps> = ({}) => {
   const {
@@ -37,7 +38,10 @@ const AppLayoutHeader: FC<AppLayoutHeaderProps> = ({}) => {
               lineHeight: '18px',
             }}
           >
-            Logo
+            <Link to={'/'} style={{ color: 'black' }}>
+              {' '}
+              Logo
+            </Link>
           </div>
         </div>
       </Header>
